@@ -58,6 +58,8 @@ class My_Network:
         to_remove.append(v)
     for v in reversed(sorted(to_remove)):
       self.G.remove_vertex(v)
+    
+    print("Number of nodes: ", self.G.num_vertices(), "\nNumber of links: ", self.G.num_edges())
 
   """ 
   
