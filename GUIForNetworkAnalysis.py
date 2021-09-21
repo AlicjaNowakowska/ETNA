@@ -17,7 +17,6 @@ import rpy2.robjects as robjects
 from rpy2.robjects.vectors import StrVector
 import pandas as pd
 
-%matplotlib inline 
 class GUI_for_graph_analysis:
   def __init__(self):
     # Initializing the variables and the GUI elements:
