@@ -1174,7 +1174,8 @@ class GUI_for_network_analysis:
     if method == "Cascade":
       nodes = data.keys()
       values = data.values()
-      self.dataframe = pd.DataFrame({"NodeIndex":nodes, "Cascade size": values})
+      fractions = [i/100 for i in range(0,100)]
+      self.dataframe = pd.DataFrame({"Fraction": fractions, "NodeIndex":nodes, "Cascade size": values})
       self.download_button.layout.visibility = 'visible'
       self.download_button.contents = lambda: self.dataframe.to_string()
   
