@@ -6,9 +6,7 @@ import ipywidgets as widgets
 import matplotlib.pyplot as plt
 import numpy as np
 from IPython.display import clear_output
-#from ipywidgets import Layout
 import seaborn as sns
-#from ipywidgets import HBox, VBox
 from ipywidgets import *
 import rpy2.robjects.packages as rpackages
 from rpy2.robjects.packages import importr
@@ -18,7 +16,7 @@ from rpy2.robjects.vectors import StrVector
 import pandas as pd
 from IPython.utils import io
 
-# Download button
+# Libraries for Download button
 import base64
 import hashlib
 from typing import Callable
@@ -26,6 +24,7 @@ from typing import Callable
 import ipywidgets
 from IPython.display import HTML, display
 
+# Installing R packages
 utils = rpackages.importr('utils')
 with io.capture_output() as captured:
   utils.install_packages('poweRlaw', repos="https://cloud.r-project.org")
@@ -504,10 +503,11 @@ class My_Network:
     
     plt.show(block = block)
 
+# Defining additional ipywidget that will perform data download after button hitting - DownloadButton
 class DownloadButton(ipywidgets.Button):
     """Download button with dynamic content
 
-    The content is generated using a callback when the button is clicked.
+    The content is generated using a callback when the button is clicked. It is defined as an extension of "button" class in ipywidgets (source: https://stackoverflow.com/questions/61708701/how-to-download-a-file-using-ipywidget-button). 
     """
 
     def __init__(self, filename: str, contents: Callable[[], str], **kwargs):
@@ -539,14 +539,14 @@ document.getElementById('{id}').click();
 </html>
 """))
 
-# GUI:
-class GUI_for_graph_analysis:
+# Graphical User Interface: 
+class GUI_for_network_analysis:
   def __init__(self):
     # Initializing the variables and the GUI elements:
     self.G = None
     self.initial_info = widgets.HTML(value = "<b><font color='#555555';font size =5px;font family='Helvetica'>Graphical User Interface for networks analysis</b>")
     self.instruction_header = widgets.HTML(value = "<b><font color='#555555';font size =4px;font family='Helvetica'>Instruction:</b>")
-    self.instruction = widgets.HTML(value = "<b><font color='#555555';font size =2.5px;font family='Helvetica'>1. Provide file name with with .graphml extension. <br>2. Hit Prepare the network button. <br>3. Choose the tab of interest. <br>4. Adjust method settings if present.<br> 5. Run the method by hitting the tab's Run button.<br>6. If you want to run new analysis for a new network hit Restart GUI button. </b>")
+    self.instruction = widgets.HTML(value = "<b><font color='#555555';font size =2.5px;font family='Helvetica'>1. Provide file name with with .graphml extension. <br>2. Hit Prepare the network button (Parallel links, nodes not from the largest component will be removed. Network is set as undirected) . <br>3. Choose the tab of interest. <br>4. Adjust method settings if present.<br> 5. Run the method by hitting the tab's Run button.<br>6. If you want to run new analysis for a new network hit Restart GUI button. </b>")
     self.file_name_textbox = widgets.Text(value='Provide file name here',
                                           placeholder='Type something',
                                           description='Network:',
@@ -688,7 +688,6 @@ class GUI_for_graph_analysis:
                                       description='Calculate p-value',
                                       disabled=False,
                                       indent=False)
-    #self.bootstrap_settings_label = widgets.HTML(value = "<b><font color='black';font size =2px;font family='Helvetica'>Number of simulations for bootstrap </b>") 
     self.bootstrap_settings_label = widgets.Label(value = "Number of simulations for bootstrap")
     self.bootstrap_settings = widgets.IntSlider(value=100, min=10, max=1000, step=100, 
                                                       description='',
@@ -703,7 +702,6 @@ class GUI_for_graph_analysis:
                                       description='Cutoff value according to Kolomogrov distance',
                                       disabled=False,
                                       indent=False)
-    #self.cutoff_label = widgets.HTML(value = "<b><font color='black';font size =2px;font family='Helvetica'>Cutoff value</b>")
     self.cutoff_label = widgets.Label(value = "Cutoff value") 
     self.cutoff_label.layout.visibility = 'hidden'
     self.cutoff = widgets.IntSlider(value = 1, min=1, max=100, step=1, 
@@ -741,17 +739,6 @@ class GUI_for_graph_analysis:
 
     self.error_info = widgets.HTML(value = " ")
     self.plot_label = widgets.HTML(value = "Plot and info")
-    """self.data_preview_button = widgets.Button(value=False,
-                                         description='data_preview_button',
-                                         disabled=False,
-                                         button_style='', # 'success', 'info', 'warning', 'danger' or ''
-                                         tooltip='Description',
-                                         icon='check', # (FontAwesome names without the `fa-` prefix)
-                                         layout=Layout(width='100%', height='100%'),
-                                         style= {'button_color':'#FFD3B4'}
-                                         )
-    self.data_preview_button.layout.visibility = 'hidden'
-    self.data_preview = widgets.Output()"""
     self.download_button = DownloadButton(filename='data.csv', contents=lambda: f'', description='Download data')
     self.download_button.layout.visibility = 'hidden'
     self.download_button.layout.width = '90%'
@@ -766,7 +753,8 @@ class GUI_for_graph_analysis:
 
     """
     self.clear()
-
+    
+    # Error handling:
     if self.file_name_textbox.value == "" or self.file_name_textbox.value == 'Provide file name here':
       self.file_name_textbox.value = "No file name provided. Provide file name here."
       return None
@@ -789,7 +777,7 @@ class GUI_for_graph_analysis:
   def centrality_button_click(self, b):
     """
 
-    Binds the centrality measure choice from the centrality tab with the appropriate map (1) and plot generation (2).
+    Binds the centrality measure button from the centrality tab with the appropriate map (1) and plot generation (2) and statistics calculations (3).
 
     """
     self.clear()
@@ -807,9 +795,10 @@ class GUI_for_graph_analysis:
                                           'Eigenvector centrality':self.G.create_eigenvector_distribution_map,
                                           "Clustering coefficient": self.G.create_clustering_map}
           my_map = centrality_choices_functions[self.centrality_choice.value]() 
-          fig, ax = self.G.plot_map_histogram(my_map, self.centrality_choice.value) # 2)
+          fig, ax = self.G.plot_map_histogram(my_map, self.centrality_choice.value) # 2
           self.retrieve_data(my_map, "Centrality and clustering")
           my_map = list(my_map.fa)
+          # 3:
           self.info_mini_value.value = str(min(my_map))
           self.info_maxi_value.value = str(max(my_map))
           self.info_avg_value.value = str(round(np.mean(my_map),4))
@@ -829,7 +818,7 @@ class GUI_for_graph_analysis:
   def assortativity_button_click(self, b):
     """
 
-    Defines what to do when the ANND button is clicked. Tutaj dopisacv potem. 
+    Binds the assortativity button with the ANND plot generation (1) and degree correlation calculations (2).
 
     """
     self.clear()
@@ -838,14 +827,16 @@ class GUI_for_graph_analysis:
     else:
       corr_value = round(self.G.calculate_assortativity_value(),3)
       corr_meaning = "assortative" if corr_value>0 else "disassortative"
-      self.label_corr_value.value = "Degree correlation coefficient equals " + str(corr_value)+". Graph has "+ corr_meaning +' mixing patterns with regards to the degree.' 
+      self.label_corr_value.value = "Degree correlation coefficient equals " + str(corr_value)+". Graph has "+ corr_meaning +' mixing patterns with regards to the degree.' # 2
       with self.assortativity_out:
         self.assortativity_out.clear_output()
-        self.G.plot_ANND(normed = self.ANND_plot_settings_normed.value, errorbar = self.ANND_plot_settings_errorbar.value, block = False)
+        self.G.plot_ANND(normed = self.ANND_plot_settings_normed.value, errorbar = self.ANND_plot_settings_errorbar.value, block = False) # 1
 
   def hubs_impact_choice_plot(self, b):
     """
-    Binds...
+    
+    Binds the hubs impact button with the hubs impact plot generation. Data is firstly calculated by calling hubs_impact check function (1) and then plotted (2).
+    
     """
     self.clear()
     with self.hubs_impact_out:
@@ -856,25 +847,34 @@ class GUI_for_graph_analysis:
           return None
         else:
           if self.hubs_impact_choice.value == "Hubs impact 1":
-            Ns, Es, degrees_set = self.G.hubs_impact_check()
-            self.G.plot_hubs_impact1(degrees_set, Es, block = False)
+            Ns, Es, degrees_set = self.G.hubs_impact_check() # 1
+            self.G.plot_hubs_impact1(degrees_set, Es, block = False) # 2
 
           if self.hubs_impact_choice.value == "Hubs impact 2":
-            Ns, Es, degrees_set = self.G.hubs_impact_check()
-            self.G.plot_hubs_impact2(degrees_set, Es, Ns, block = False)
+            Ns, Es, degrees_set = self.G.hubs_impact_check() # 1
+            self.G.plot_hubs_impact2(degrees_set, Es, Ns, block = False) # 2
   
   def cascade_button_click(self, b):
+    """
+    
+    Binds the cascade button with fialure cascade simulation performance (1), plotting (2) and the statistics calculations (3). 
+    
+    """
     self.clear()
     if self.error() == True:
           return None
     else:
+      # Button settings: 
       self.button_cascade.style.button_color = '#FFAAA7'
       self.button_cascade.description = "Running simulation..."
-      cascade_data = self.G.cascade_all_nodes(fraction_to_fail = self.cascade_fraction_to_fail.value)
+      
+      # Data generation: 
+      cascade_data = self.G.cascade_all_nodes(fraction_to_fail = self.cascade_fraction_to_fail.value) # 1
       self.retrieve_data(cascade_data, "Cascade")
       with self.cascade_out:
         self.cascade_out.clear_output()
-        self.G.plot_cascade(cascade_data, fraction_to_fail = self.cascade_fraction_to_fail.value)
+        self.G.plot_cascade(cascade_data, fraction_to_fail = self.cascade_fraction_to_fail.value) # 2
+        # (3):
         self.info_mini_value.value = str(min(cascade_data.values()))
         self.info_maxi_value.value = str(max(cascade_data.values()))
         self.info_avg_value.value = str(round(np.mean(list(cascade_data.values())),4))
@@ -894,6 +894,11 @@ class GUI_for_graph_analysis:
       self.button_cascade.style.button_color = '#98DDCA'
   
   def robustness_button_click(self, b):
+    """
+    
+    Binds robustness button with the reboustness examination. In the call the data is generated (1) and then plotted (2).
+    
+    """
     self.clear()
     if self.error() == True:
           return None
@@ -908,23 +913,27 @@ class GUI_for_graph_analysis:
         if metric.value == True:
           [function, metric_name] = metrics_to_run[metric]
           map_G = function()
-          results = self.G.robustness_evaluation(map_G)
+          results = self.G.robustness_evaluation(map_G) # 1
           results_to_plot.append([results, metric_name])
 
       self.retrieve_data(results_to_plot, "Robustness")
 
       with self.robustness_out:
         self.robustness_out.clear_output()
-        self.G.plot_robustness(results_to_plot, block=True)
+        self.G.plot_robustness(results_to_plot, block=True) # 2
   
   def powerlaw_button_click(self, b):
+    """
+    
+    Binds the powerlaw button with the power law adjustment to the degree sequence. Parameters are calculated (1), the fit is plotted (2) and the statistics are calculated (3).
+    """
     self.clear()
     if self.error() == True:
       return None
     else:
       pvalue = "Not calculated"
       cutoff = self.cutoff.value if self.cutoff_settings.value == False else False
-      (kmin, alpha, percentage, likelihood, plotting_data, my_powerlaw) = self.G.powerlaw(cutoff)
+      (kmin, alpha, percentage, likelihood, plotting_data, my_powerlaw) = self.G.powerlaw(cutoff) # 1
       if self.powerlaw_pvalue.value == True:
         # calculate also p-value
         N = self.bootstrap_settings.value
@@ -935,7 +944,8 @@ class GUI_for_graph_analysis:
 
       with self.powerlaw_out:
         self.powerlaw_out.clear_output()
-        self.G.plot_powerlaw(plotting_data, block = True)
+        self.G.plot_powerlaw(plotting_data, block = True) # 2
+        # 3:
         self.info_mini.value = "<b><font color='black';font size =2px;font family='Helvetica'>Cutoff: </b>"
         self.info_mini_value.value = str(kmin)
         self.info_maxi.value = "<b><font color='black';font size =2px;font family='Helvetica'>Power law parameter alpha: </b>"
@@ -956,6 +966,11 @@ class GUI_for_graph_analysis:
         ]))
   
   def powerlaw_pvalue_true(self, b):
+    """
+    
+    Function for handling the powerlaw settings. It makes visible the bootstrap settings if the pvalue is to be assesed (pvalue checkbox is True).
+    
+    """
     if self.powerlaw_pvalue.value == True:
       self.bootstrap_settings.layout.visibility = 'visible'
       self.bootstrap_settings_label.layout.visibility = "visible"
@@ -964,6 +979,11 @@ class GUI_for_graph_analysis:
       self.bootstrap_settings_label.layout.visibility = "hidden"
   
   def powerlaw_cutoff(self, b):
+    """
+    
+    Function for handling the powerlaw settings. It makes visible the cutoff choice bar if the default option for cutoff adjustment using the Kolomogrov distance is not chosen.
+    
+    """
     if self.cutoff_settings.value == False:
       self.cutoff_label.layout.visibility = "visible"
       self.cutoff.layout.visibility = 'visible'
@@ -979,6 +999,11 @@ class GUI_for_graph_analysis:
       self.cutoff.layout.visibility = 'hidden'
 
   def display(self):
+    """
+    
+    Displays all the elements of the GUI in the appropriate order to form the interface.
+    
+    """
     display(self.initial_info)
     display(self.instruction_header)
     display(self.instruction)
@@ -991,19 +1016,9 @@ class GUI_for_graph_analysis:
                            self.download_button
                          ]) # self.clustering_out
     all = HBox(children = [tabs_preparation, outs])
-    #HBox(children=[self.download_button, self.data_preview_button]], layout = Layout(width = "100%")))
-    #display(self.file_name_textbox)
-    #display(self.button_graph_preparation)
-    #display(HBox(children=[self.tabs,
-    #                       VBox(children = [
-    #                       self.centrality_out, self.hubs_impact_out, 
-    #                       self.assortativity_out, self.label_corr_value, 
-    #                       self.robustness_out, self.cascade_out]) # self.clustering_out
-    #                       ])) # tu na poczatku VBox bylo self.plot_label
     display(all)
     display(self.error_info)
     display(self.restart_button) 
-    #display(self.out)
 
   def bind(self):
     """
@@ -1015,35 +1030,32 @@ class GUI_for_graph_analysis:
     # Bind prepare graph button with the preparation function:
     self.button_graph_preparation.on_click(self.button_graph_preparation_click)
 
-    # Bind centrality choice with the plot generation and centrality tab
-    #self.centrality_out = interactive_output(self.centrality_choice_plot, {'b':self.centrality_choice})
+    # Bind centrality choice button with the centrality examination and centrality tab
     self.button_centrality.on_click(self.centrality_button_click)
     self.tab_centrality = VBox(children=[self.label_centrality, self.centrality_choice, self.button_centrality])
 
-    # Bind clusterization button with the plot generation and clusterization tab
-    #self.button_clustering.on_click(self.clustering_button_click)
-    #self.tab_clustering = VBox(children=[self.label_clustering, self.button_clustering])
-
-    # Bind hubs_impact method choice with the plot generation and hubs_impact tab
-    #self.hubs_impact_out = interactive_output(self.hubs_impact_choice_plot, {'b':self.hubs_impact_choice})
+    # Bind hubs_impact button with the plot generation and hubs_impact tab
     self.hubs_impact_button.on_click(self.hubs_impact_choice_plot)
     self.tab_hubs_impact = VBox(children=[self.label_hubs_impact, self.label_hubs_impact_explain, self.hubs_impact_choice, self.hubs_impact_button])
 
-    # Bind assortativity button with the plot generation and assortativity calculation and assortativity tab
+    # Bind assortativity button with the assortativity examination and assortativity tab
     self.button_assortativity.on_click(self.assortativity_button_click)
     self.tab_assortativity = VBox(children=[self.label_ANND_plot, self.label_ANND_plot_settings, 
                                             self.ANND_plot_settings_errorbar, self.ANND_plot_settings_normed, self.button_assortativity
                                             ])
-
+    
+    # Bind robustness button with the robustness examination and robustness tab
     self.button_robustness.on_click(self.robustness_button_click)
     self.robustness = VBox(children=[self.label_robustness_info, self.label_robustness_settings, self.robustness_degree, self.robustness_betweenness, 
                                      self.robustness_closeness,
                                      self.robustness_eigenvector, self.button_robustness])
-
+    
+    # Bind cascade button with the failure cascade examination and cascade tab
     self.button_cascade.on_click(self.cascade_button_click)
     self.tab_cascade = VBox(children=[self.cascade_info, HBox(children = [self.cascade_fraction_to_fail_label, self.cascade_fraction_to_fail]), 
                                       self.button_cascade])
     
+    # Bind powerlaw button with the powerlaw examination, bind powerlaw settings with the corresponding actions, add all to the powerlaw tab
     self.powerlaw_button.on_click(self.powerlaw_button_click)
     self.powerlaw_bootstrap = interactive_output(self.powerlaw_pvalue_true, {'b':self.powerlaw_pvalue})
     self.powerlaw_cutoff = interactive_output(self.powerlaw_cutoff, {'b':self.cutoff_settings})
@@ -1072,10 +1084,15 @@ class GUI_for_graph_analysis:
     self.tabs.set_title(4, '> Failure cascade')
     self.tabs.set_title(5, '> Power law fitting')
 
-    #self.data_preview_button.on_click(self.data_preview_button_click)
+    # Bind restart button with the restart function
     self.restart_button.on_click(self.gui_restart)
 
   def gui_restart(self,b):
+    """ 
+    
+    Sets everything to the initial settings by cleaning the output widgets, fixing colors, bringing original texts to the labels and buttons
+    
+    """
     self.G = None
     self.file_name_textbox.value = "Provide file name here"
     self.button_graph_preparation.description = "Prepare the graph"
@@ -1103,13 +1120,22 @@ class GUI_for_graph_analysis:
     self.download_button.layout.visibility = 'hidden'
   
   def error(self, return_message = True):
-    # zmienic dac do funkcji on click
+    """
+    
+    Used for error handling - checks if the file is provided in the appropriate format. This functions is called always before running any of the methods in the GUI.
+    
+    """
     if self.G == None or self.file_name_textbox.value == "No file name provided. Provide file name here." or self.file_name_textbox.value == "":
       if return_message==True:
         self.error_info.value = "<b><font color='#FFAAA7';font size =3px;font family='Helvetica'>Cannot use the method. Provide file name and prepare the network first.</b>"
       return True
   
   def clear(self):
+    """
+    
+    Clears the outputs. Used to make previous plots and statistics disappear from the GUI when the new method is called. This functions is called always before running any of the methods in the GUI.
+    
+    """
     self.centrality_out.clear_output() 
     self.hubs_impact_out.clear_output()
     self.assortativity_out.clear_output()
@@ -1123,6 +1149,10 @@ class GUI_for_graph_analysis:
     self.download_button.layout.visibility = 'hidden'
   
   def retrieve_data(self, data, method):
+    """
+    
+    Used to gather the data from the method functions so that it is downloadable. Called in 3 cases - when the robustness, cascade or Centrality and clustering methods are chosen.
+    """
     if method == "Centrality and clustering":
       my_map = data
       my_map_values = my_map.a[self.G.G.get_vertices()]
@@ -1148,8 +1178,6 @@ class GUI_for_graph_analysis:
       self.download_button.layout.visibility = 'visible'
       self.download_button.contents = lambda: self.dataframe.to_string()
   
-  #def data_preview_button_click(self, b):
-   # with self.data_preview:
-    #  print(self.dataframe.head(n=5))
+
   
 
