@@ -1099,6 +1099,7 @@ class GUI_for_network_analysis:
     self.file_name_textbox.value = "Provide file name here"
     self.button_graph_preparation.description = "Prepare the graph"
     self.button_graph_preparation.style.button_color = "#FFAAA7"
+    self.links_nodes_number_info.value = ""
     self.centrality_choice.value = "Choose from the list"
     self.centrality_out.clear_output()
     #self.clustering_out.clear_output()
