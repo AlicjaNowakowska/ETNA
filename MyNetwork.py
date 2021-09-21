@@ -1,4 +1,5 @@
 import warnings
+from IPython.utils import io
 warnings.filterwarnings("ignore")
 from graph_tool.all import *
 import graph_tool.all as gt
