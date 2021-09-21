@@ -24,7 +24,6 @@ from typing import Callable
 
 import ipywidgets
 from IPython.display import HTML, display
-from DownloadButton import *
 
 utils = rpackages.importr('utils')
 with io.capture_output() as captured:
