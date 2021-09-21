@@ -228,17 +228,6 @@ class GUI_for_graph_analysis:
 
     self.error_info = widgets.HTML(value = " ")
     self.plot_label = widgets.HTML(value = "Plot and info")
-    """self.data_preview_button = widgets.Button(value=False,
-                                         description='data_preview_button',
-                                         disabled=False,
-                                         button_style='', # 'success', 'info', 'warning', 'danger' or ''
-                                         tooltip='Description',
-                                         icon='check', # (FontAwesome names without the `fa-` prefix)
-                                         layout=Layout(width='100%', height='100%'),
-                                         style= {'button_color':'#FFD3B4'}
-                                         )
-    self.data_preview_button.layout.visibility = 'hidden'
-    self.data_preview = widgets.Output()"""
     self.download_button = DownloadButton(filename='data.csv', contents=lambda: f'', description='Download data')
     self.download_button.layout.visibility = 'hidden'
     self.download_button.layout.width = '90%'
