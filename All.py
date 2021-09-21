@@ -16,6 +16,7 @@ import rpy2
 import rpy2.robjects as robjects
 from rpy2.robjects.vectors import StrVector
 import pandas as pd
+from IPython.utils import io
 
 # Download button
 import base64
