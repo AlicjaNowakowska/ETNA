@@ -25,6 +25,7 @@ from typing import Callable
 import ipywidgets
 from IPython.display import HTML, display
 from DownloadButton import *
+from DownloadButton import DownloadButton
 
 # GUI:
 class GUI_for_graph_analysis:
