@@ -59,8 +59,6 @@ class My_Network:
     for v in reversed(sorted(to_remove)):
       self.G.remove_vertex(v)
     
-    print("Number of nodes: ", self.G.num_vertices(), "\nNumber of links: ", self.G.num_edges())
-
   """ 
   
   The following functions are responsible for calculation of centrality measures and clustering coefficient. 
@@ -565,6 +563,7 @@ class GUI_for_network_analysis:
                                                    layout=Layout(width='40%', height='20%'),
                                                    style= {'button_color':'#FFAAA7'}
                                                    )
+    self.links_nodes_number_info = widgets.Label(value="")
       
     self.label_centrality = widgets.HTML(value = "<b><font color='black';font size =2px;font family='Helvetica'>Histograms of centrality measures</b>") 
     self.centrality_choice = widgets.Dropdown(
@@ -775,6 +774,7 @@ class GUI_for_network_analysis:
 
     self.button_graph_preparation.description = "Graph is ready! Now choose the tool below."
     self.button_graph_preparation.style.button_color = '#D5ECC2'
+    self.links_nodes_number_info.value = "Number of nodes: "+str(self.G.G.num_vertices())+", Number of links: " + str(self.G.G.num_edges())
 
   def centrality_button_click(self, b):
     """
@@ -1009,7 +1009,7 @@ class GUI_for_network_analysis:
     display(self.initial_info)
     display(self.instruction_header)
     display(self.instruction)
-    preparation = VBox(children = [self.file_name_textbox, self.button_graph_preparation], layout = Layout(width = "100%"))
+    preparation = VBox(children = [self.file_name_textbox, self.button_graph_preparation, self.links_nodes_number_info], layout = Layout(width = "100%"))
     display(preparation)
     tabs_preparation = self.tabs
     outs = VBox(children = [self.centrality_out, self.hubs_impact_out, 
