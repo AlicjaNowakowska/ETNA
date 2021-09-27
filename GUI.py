@@ -762,8 +762,8 @@ class GUI_for_network_analysis:
     if self.file_name_textbox.value == "" or self.file_name_textbox.value == 'Provide file name here':
       self.file_name_textbox.value = "No file name provided. Provide file name here."
       return None
-    if ".graphml" or ".csv" not in self.file_name_textbox.value:
-      self.file_name_textbox.value = "Incorrect file name. File must have .graphml extension."
+    if ".graphml" not in self.file_name_textbox.value and ".csv" not in self.file_name_textbox.value:
+      self.file_name_textbox.value = "Incorrect file name. File must have .graphml or .csv extension."
       return None
 
     self.button_graph_preparation.description = "Preparing..."
