@@ -1060,6 +1060,7 @@ class GUI_for_network_analysis:
     Sets everything to the initial settings by cleaning the output widgets, fixing colors, bringing original texts to the labels and buttons
     
     """
+    self.clear()
     self.G = None
     self.file_name_textbox.value = "Provide file name here"
     self.button_graph_preparation.description = "Prepare the graph"
