@@ -1060,7 +1060,6 @@ class GUI_for_network_analysis:
     Sets everything to the initial settings by cleaning the output widgets, fixing colors, bringing original texts to the labels and buttons
     
     """
-    self.clear()
     self.G = None
     self.file_name_textbox.value = "Provide file name here"
     self.button_graph_preparation.description = "Prepare the graph"
@@ -1084,6 +1083,7 @@ class GUI_for_network_analysis:
     self.robustness_out.clear_output()
     self.powerlaw_pvalue.value = False
     self.cutoff_settings.value = True
+    self.powerlaw_out.clear_output()
     #self.data_preview.clear_output()
     #self.data_preview_button.layout.visibility = 'hidden'
     self.download_button.layout.visibility = 'hidden'
