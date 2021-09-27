@@ -34,7 +34,10 @@ class My_Network:
 
   def __init__(self, file_name):
     # Graph is created through the file upload
-    self.G = graph_tool.load_graph(file_name)
+    if ".csv" in file_name:
+      self.G = graph_tool.load_graph_from_csv(file_name)
+    if ".graphml" in file_name:
+      self.G = graph_tool.load_graph(file_name)
 
   def prepare_the_network(self):
     """
@@ -546,7 +549,7 @@ class GUI_for_network_analysis:
     self.G = None
     self.initial_info = widgets.HTML(value = "<b><font color='#555555';font size =5px;font family='Helvetica'>Graphical User Interface for networks analysis</b>")
     self.instruction_header = widgets.HTML(value = "<b><font color='#555555';font size =4px;font family='Helvetica'>Instruction:</b>")
-    self.instruction = widgets.HTML(value = "<b><font color='#555555';font size =2.5px;font family='Helvetica'>1. Provide file name with with .graphml extension. <br>2. Hit Prepare the network button (Parallel links, nodes not from the largest component will be removed. Network is set as undirected) . <br>3. Choose the tab of interest. <br>4. Adjust method settings if present.<br> 5. Run the method by hitting the tab's Run button.<br>6. If you want to run new analysis for a new network hit Restart GUI button. </b>")
+    self.instruction = widgets.HTML(value = "<b><font color='#555555';font size =2.5px;font family='Helvetica'>1. Provide file name with with .graphml or .csv extension. <br>2. Hit Prepare the network button (Parallel links, nodes not from the largest component will be removed. Network is set as undirected) . <br>3. Choose the tab of interest. <br>4. Adjust method settings if present.<br> 5. Run the method by hitting the tab's Run button.<br>6. If you want to run new analysis for a new network hit Restart GUI button. </b>")
     self.file_name_textbox = widgets.Text(value='Provide file name here',
                                           placeholder='Type something',
                                           description='Network:',
@@ -759,7 +762,7 @@ class GUI_for_network_analysis:
     if self.file_name_textbox.value == "" or self.file_name_textbox.value == 'Provide file name here':
       self.file_name_textbox.value = "No file name provided. Provide file name here."
       return None
-    if ".graphml" not in self.file_name_textbox.value:
+    if ".graphml" or ".csv" not in self.file_name_textbox.value:
       self.file_name_textbox.value = "Incorrect file name. File must have .graphml extension."
       return None
 
