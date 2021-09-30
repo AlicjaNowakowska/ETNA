@@ -1177,7 +1177,7 @@ class GUI_for_network_analysis:
         dataframe[row[1]] = row[0]
       self.dataframe = pd.DataFrame(dataframe)
       self.dataframe["RemovedFraction"] = fractions = [i/100 for i in range(0,100)]
-      self.dataframe = self.dataframe[['RemovedFraction' + [ col for col in self.dataframe.columns if col != 'RemovedFraction' ] ]]
+      self.dataframe = self.dataframe[['RemovedFraction'] + [ col for col in self.dataframe.columns if col != 'RemovedFraction' ] ]]
       self.download_button.layout.visibility = 'visible'
       self.dataframe = self.dataframe.to_csv()
       self.download_button.contents = lambda: self.dataframe
