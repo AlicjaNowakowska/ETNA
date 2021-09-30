@@ -1069,9 +1069,8 @@ class GUI_for_network_analysis:
                                          self.powerlaw_button])
 
     # Joining tabs in the GUI
-    self.tabs = widgets.Accordion(children = [self.tab_centrality, 
-                                             self.tab_assortativity, 
-                                              self.tab_hubs_impact, self.robustness, self.tab_cascade, self.tab_powerlaw], 
+    self.tabs = widgets.Accordion(children = [self.tab_centrality, self.tab_powerlaw,
+                                              self.tab_hubs_impact, self.tab_assortativity, self.robustness, self.tab_cascade], 
                                   layout=Layout(width='40%', min_width = "300px",
                                                 ), selected_index = None) #self.tab_clustering bylo kiedys, 
                                                 #layout in_height='500px',max_height='500px',  display='flex'align_items='stretch'
@@ -1079,12 +1078,11 @@ class GUI_for_network_analysis:
     
     # Additional tabs' settings
     self.tabs.set_title(0, '> Centrality and clusterization ')
-    #self.tabs.set_title(1, "> Clusterization")
-    self.tabs.set_title(1, '> Assortativity')
+    self.tabs.set_title(1, '> Power law fitting')
     self.tabs.set_title(2, '> Hubs impact')
-    self.tabs.set_title(3, '> Robustenss')
-    self.tabs.set_title(4, '> Failure cascade')
-    self.tabs.set_title(5, '> Power law fitting')
+    self.tabs.set_title(3, '> Assortativity')
+    self.tabs.set_title(4, '> Robustenss')
+    self.tabs.set_title(5, '> Failure cascade')
 
     # Bind restart button with the restart function
     self.restart_button.on_click(self.gui_restart)
