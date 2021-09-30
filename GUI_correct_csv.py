@@ -1130,7 +1130,7 @@ class GUI_for_network_analysis:
       #self.data_preview_button.layout.visibility = 'visible'
       self.download_button.layout.visibility = 'visible'
       self.dataframe = self.dataframe.to_csv()
-      self.download_button.contents = lambda: self.dataframe.to_string()
+      self.download_button.contents = lambda: self.dataframe
 
     if method == "Robustness":
       results_to_plot = data
@@ -1141,7 +1141,7 @@ class GUI_for_network_analysis:
       self.dataframe["fractions"] = fractions = [i/100 for i in range(0,100)]
       self.download_button.layout.visibility = 'visible'
       self.dataframe = self.dataframe.to_csv()
-      self.download_button.contents = lambda: self.dataframe.to_string()
+      self.download_button.contents = lambda: self.dataframe
 
     if method == "Cascade":
       nodes = data.keys()
@@ -1149,4 +1149,4 @@ class GUI_for_network_analysis:
       self.dataframe = pd.DataFrame({"NodeIndex":nodes, "Cascade size": values})
       self.download_button.layout.visibility = 'visible'
       self.dataframe = self.dataframe.to_csv()
-      self.download_button.contents = lambda: self.dataframe.to_string()
+      self.download_button.contents = lambda: self.dataframe
