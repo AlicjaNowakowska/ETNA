@@ -379,9 +379,9 @@ class My_Network:
     fraction = [i/100 for i in range(0,100,step)]
     plt.figure(figsize = (5,5))
     plt.style.use('seaborn-whitegrid')
-    plot_metric_labels = {"Degree": ["-", "#D81B60"] , "Betweenness centrality": ["-", "#1E88E5"],
-                          "Closeness centrality" : ["-","#FFC107"], 
-                          "Eigenvector centrality": ["-", "#004D40"]} 
+    plot_metric_labels = {"Degree": ["--*", "#D81B60"] , "Betweenness centrality": ["--o", "#1E88E5"],
+                          "Closeness centrality" : ["--+","#FFC107"], 
+                          "Eigenvector centrality": ["--^", "#004D40"]} 
     plt.xlabel("Fraction of nodes removed", fontsize = FONT)
     plt.ylabel("Largest component size", fontsize = FONT)
     plt.title("Robustness of the network", fontsize = FONT)
@@ -390,7 +390,7 @@ class My_Network:
     for i in metrics_results:
       data, metric_name = i
       data = [i/max(data) for i in data]
-      plt.plot(fraction, data, plot_metric_labels[metric_name][0], label= metric_name, color=plot_metric_labels[metric_name][1], linewidth = 3)
+      plt.plot(fraction, data, plot_metric_labels[metric_name][0], label= metric_name, color=plot_metric_labels[metric_name][1], linewidth = 1, markersize = 7)
 
     plt.legend()
     plt.show(block=False)
