@@ -953,7 +953,7 @@ class GUI_for_network_analysis:
         self.info_maxi.value = "<b><font color='black';font size =2px;font family='Helvetica'>Power law parameter alpha: </b>"
         self.info_maxi_value.value = str(round(alpha,4))
         if alpha>3 or alpha<2:
-          self.info_maxi_value.value+= ", anomalous regime, should be 2<alpha<3"
+          self.info_maxi_value.value+= ", ANOMALOUS REGIME!, standard: 2<alpha<3"
         self.info_avg.value = "<b><font color='black';font size =2px;font family='Helvetica'>Percentage of data covered: </b>"
         self.info_avg_value.value = str(round(percentage*100,4))
         self.info_std.value = "<b><font color='black';font size =2px;font family='Helvetica'>Likelihood: </b>"
