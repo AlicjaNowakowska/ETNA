@@ -689,7 +689,7 @@ class GUI_for_network_analysis:
                                       disabled=False,
                                       indent=False)
     self.bootstrap_settings_label = widgets.Label(value = "Number of simulations for bootstrap")
-    self.bootstrap_settings = widgets.IntSlider(value=100, min=10, max=1000, step=100, 
+    self.bootstrap_settings = widgets.IntSlider(value=100, min=50, max=1000, step=50, 
                                                       description='',
                                                       disabled=False,
                                                       continuous_update=False,
