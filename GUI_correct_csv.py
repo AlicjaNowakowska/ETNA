@@ -867,7 +867,7 @@ class GUI_for_network_analysis:
     else:
       # Button settings: 
       self.button_cascade.style.button_color = '#FFAAA7'
-      self.button_cascade.description = "Running simulation..."
+      self.button_cascade.description = "Running"
       
       # Data generation: 
       cascade_data = self.G.cascade_all_nodes(fraction_to_fail = self.cascade_fraction_to_fail.value) # 1)
@@ -891,7 +891,7 @@ class GUI_for_network_analysis:
             HBox(children= [self.info_std, self.info_std_value]) 
         ]))
         
-      self.button_cascade.description = "Run failure cascade simulation"
+      self.button_cascade.description = "Run"
       self.button_cascade.style.button_color = '#98DDCA'
   
   def robustness_button_click(self, b):
@@ -904,6 +904,8 @@ class GUI_for_network_analysis:
     if self.error() == True:
           return None
     else:
+      self.button_robustness.style.button_color = '#FFAAA7'
+      self.button_robustness.description = "Running..."
       metrics_to_run = {self.robustness_degree:[self.G.create_degree_distribution_map, "Degree"], 
                         self.robustness_betweenness:[self.G.create_betweenness_distribution_map, "Betweenness centrality"] , 
                         self.robustness_closeness:[self.G.create_closeness_distribution_map, 'Closeness centrality'],
@@ -922,6 +924,9 @@ class GUI_for_network_analysis:
       with self.robustness_out:
         self.robustness_out.clear_output()
         self.G.plot_robustness(results_to_plot, block=True) # 2
+        
+      self.button_robustness.description = "Run"
+      self.button_robustness.style.button_color = '#98DDCA'
   
   def powerlaw_button_click(self, b):
     """
