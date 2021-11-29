@@ -191,7 +191,7 @@ class My_Network:
     plt.yticks(fontsize=FONT-3)
     plt.xlabel("K", fontsize= FONT)
     plt.ylabel("$|E_K|/|E|$", fontsize= FONT)
-    plt.title("Relation between K and subnetworks' links\n sizes; Hubs impact2", fontsize= FONT)
+    plt.title("Relation between K and subnetworks' links\n sizes; $s_1$", fontsize= FONT)
     # Plotting the data
     plt.plot(degrees_set, Es, "o", markersize=4, color="royalblue")
     plt.show(block = block)
@@ -213,7 +213,7 @@ class My_Network:
                       "legend.fontsize":FONT-3, "legend.titlesize":FONT-3})  
     # Plotting the data
     fig = sns.scatterplot(x= Ns, y=Es, hue=np.log(degrees_set), palette="dark:blue_r")  
-    fig.set(xlabel='$|V_K|/|V|$', ylabel='$|E_K|/|E|$', title="Relation between subnetworks' nodes\nand links sizes; Hubs impact2")
+    fig.set(xlabel='$|V_K|/|V|$', ylabel='$|E_K|/|E|$', title="Relation between subnetworks' nodes\nand links sizes; $s_2$")
     plt.legend(title="Log(K)", loc ="upper left", title_fontsize=FONT-3) 
     plt.show(block = block)
   
