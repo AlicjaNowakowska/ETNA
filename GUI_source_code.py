@@ -995,7 +995,7 @@ class GUI_for_network_analysis:
     else:
       pvalue = "Not calculated"
       self.powerlaw_button.description = "Running..."
-      self.button_cascade.style.button_color = '#FFAAA7'
+      self.powerlaw_button.style.button_color = '#FFAAA7'
       cutoff = self.cutoff.value if self.cutoff_settings.value == False else False
       (kmin, alpha, percentage, likelihood, plotting_data, my_powerlaw) = self.G.powerlaw(cutoff) # 1)
       if self.powerlaw_pvalue.value == True:
@@ -1028,8 +1028,8 @@ class GUI_for_network_analysis:
             HBox(children= [self.info_avg, self.info_avg_value]),
             HBox(children= [self.pvalue_label, self.pvalue_value])
         ]))
-        self.powerlaw_button.description = "Run"
-        self.button_cascade.style.button_color = '#98DDCA'
+      self.powerlaw_button.description = "Run"
+      self.powerlaw_button.style.button_color = '#98DDCA'
   
   def powerlaw_pvalue_true(self, b):
     """
