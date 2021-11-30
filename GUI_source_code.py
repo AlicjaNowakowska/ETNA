@@ -639,7 +639,7 @@ class GUI_for_network_analysis:
     self.assortativity_out = widgets.Output()
 
     self.hubs_impact_choice = widgets.Dropdown(
-        options=['Choose from the list','$s_1$', '$s_2$'],
+        options=['Choose from the list','s1', 's2'],
         description='Measure: ',
         disabled=False,
         layout=Layout(width='90%')
@@ -653,7 +653,7 @@ class GUI_for_network_analysis:
                                                    layout=Layout(width='90%', height='20%'),
                                                    style= {'button_color':'#98DDCA'}
                                                    )
-    self.label_hubs_impact = widgets.HTML(value = "<b><font color='black';font size =2px;font family='Helvetica'>Examination of hubs impact</b>")
+    self.label_hubs_impact = widgets.HTML(value = "<b><font color='black';font size =2px;font family='Helvetica'>Plots of s1 and s2</b>")
     #self.label_hubs_impact_explain = widgets.Label(value = "Hubs impact examination consists of creating subnetworks.. i tutaj walnąć ten ładny matematyczny zapis z mgr")
     self.hubs_impact_out = widgets.Output()
 
@@ -883,11 +883,11 @@ class GUI_for_network_analysis:
         if self.error() == True:
           return None
         else:
-          if self.hubs_impact_choice.value == "Hubs impact 1":
+          if self.hubs_impact_choice.value == "s1":
             Ns, Es, degrees_set = self.G.hubs_impact_check() # 1
             self.G.plot_hubs_impact1(degrees_set, Es, block = False) # 2
 
-          if self.hubs_impact_choice.value == "Hubs impact 2":
+          if self.hubs_impact_choice.value == "s2":
             Ns, Es, degrees_set = self.G.hubs_impact_check() # 1
             self.G.plot_hubs_impact2(degrees_set, Es, Ns, block = False) # 2
   
@@ -1149,7 +1149,7 @@ class GUI_for_network_analysis:
     # Additional tabs' settings
     self.tabs.set_title(0, '> Centrality and clusterization ')
     self.tabs.set_title(1, '> Power law fitting')
-    self.tabs.set_title(2, '> Hubs impact')
+    self.tabs.set_title(2, '> Subnetworks: s1 and s2')
     self.tabs.set_title(3, '> Assortativity')
     self.tabs.set_title(4, '> Robustenss')
     self.tabs.set_title(5, '> Failure cascade')
