@@ -639,7 +639,7 @@ class GUI_for_network_analysis:
     self.assortativity_out = widgets.Output()
 
     self.hubs_impact_choice = widgets.Dropdown(
-        options=['Choose from the list','Hubs impact 1', 'Hubs impact 2'],
+        options=['Choose from the list','$s_1$', '$s_2$'],
         description='Measure: ',
         disabled=False,
         layout=Layout(width='90%')
