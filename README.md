@@ -13,5 +13,5 @@
     * .ipynb interpreter (Jupyter Notebook) - download GUIForNetworksAnalysisYourOwnJupyterInterpreter.ipynb and run each cell.
     * online .ipynb interpreter (Colab) - download GUIForNetworksAnalysisColab.ipynb, run it in Colab and run each cell.
 
-3. There are 4 network datasets that are served as exemplary ones. They can be found in the folder ExemplaryDatasets.zip
+3. There are 4 network datasets that are served as exemplary ones. They can be found in the folder ExemplaryData.zip
 
