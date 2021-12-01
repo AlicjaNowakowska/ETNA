@@ -5,11 +5,11 @@
 
 * usual Python interpreter - download GUI_source_code.py file, compile and type in the interpreter:
 
-G = GUI_for_network_analysis()
+  G = GUI_for_network_analysis()
 
-G.bind()
+  G.bind()
 
-G.display()
+  G.display()
 
 * .ipynb interpreter (Jupyter Notebook) - download GUIForNetworksAnalysisYourOwnJupyterInterpreter.ipynb and run each cell.
 * online .ipynb interpreter (Colab) - download GUIForNetworksAnalysisColab.ipynb, run it in Colab and run each cell.
