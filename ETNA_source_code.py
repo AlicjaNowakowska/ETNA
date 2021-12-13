@@ -569,7 +569,7 @@ class GUI_for_network_analysis:
     self.G = None
     self.initial_info = widgets.HTML(value = "<b><font color='#555555';font size =5px;font family='Helvetica'>ETNA: Extensive Tool for Network Analysis</b>")
     self.instruction_header = widgets.HTML(value = "<b><font color='#555555';font size =4px;font family='Helvetica'>Instruction:</b>")
-    self.instruction = widgets.HTML(value = "<b><font color='#555555';font size =2.5px;font family='Helvetica'>1. Provide file name with with .graphml or .csv extension. <br>2. Hit 'Prepare the network' button (Parallel links and nodes not from the largest component will be removed. Network is also set as undirected). <br>3. Choose the tab of interest. <br>4. Adjust method settings if present.<br>5. Run the method by hitting the tab's 'Run button'. The calculations will be performed and the appropriate plot will be displayed on the right.<br>6. If you want to run a new analysis for a new network hit 'Restart GUI' button. </b>")
+    self.instruction = widgets.HTML(value = "<b><font color='#555555';font size =2.5px;font family='Helvetica'>1. Provide file name with with .graphml or .csv extension. <br>2. Hit 'Prepare the network' button (Parallel links and nodes not from the largest component will be removed. Network is also set as undirected). <br>3. Choose the tab of interest. <br>4. Adjust method settings if present.<br>5. Run the method by hitting the tab's 'Run button'. The calculations will be performed and the appropriate plot will be displayed on the right.<br>6. If you want to run a new analysis for a new network hit 'Restart ETNA' button. </b>")
     self.file_name_textbox = widgets.Text(value='Provide file name here',
                                           placeholder='Type something',
                                           description='Network:',
@@ -764,7 +764,7 @@ class GUI_for_network_analysis:
     self.powerlaw_out = widgets.Output()
     
     self.restart_button = widgets.Button(value=False,
-                                         description='Restart GUI',
+                                         description='Restart ETNA',
                                          disabled=False,
                                          button_style='', # 'success', 'info', 'warning', 'danger' or ''
                                          tooltip='Description',
