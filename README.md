@@ -11,7 +11,7 @@
       G.display()
 
     * .ipynb interpreter (Jupyter Notebook) - download GUIForNetworkAnalysisYourOwnJupyterInterpreter.ipynb and run each cell.
-    * online .ipynb interpreter (Colab) - download GUIForNetworkAnalysisColab.ipynb, run it in Colab and run each cell.
+    * online .ipynb interpreter (Colab) - Go to https://githubtocolab.com/AlicjaNowakowska/GUIForNetworkAnalysis/blob/main/GUIForNetworkAnalysisColab.ipynb and run each cell by clicking Shift + Enter buttons or download the file on your computer, upload it to your Google Drive, open the file using Colab and run each cell by clicking Shift + Enter buttons. 
 
 3. There are 4 network datasets served as exemplary ones. They can be found in the folder ExemplaryData.zip
 
