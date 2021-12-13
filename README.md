@@ -2,7 +2,7 @@
 1. This repository contains the implemntation of Graphical User Interface for network analysis. Classical measures and simulation-based ones are included. This software requieres graph-tool, numpy, pandas, random, rpy2, ipywidgets, base64, hashlib and typing libraries to be installed.
 
 2. There are **three** methods of running ETNA: 
-    * usual Python interpreter - download GUI_source_code.py file, compile and type in the interpreter:
+    * usual Python interpreter - download ETNA_source_code.py file, compile and type in the interpreter:
 
       G = GUI_for_network_analysis()
 
