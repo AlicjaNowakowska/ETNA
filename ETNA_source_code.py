@@ -1258,7 +1258,3 @@ class GUI_for_network_analysis:
       self.download_button.layout.visibility = 'visible'
       self.dataframe = self.dataframe.to_csv()
       self.download_button.contents = lambda: self.dataframe
-      
-G = GUI_for_network_analysis()
-G.bind()
-G.display()
