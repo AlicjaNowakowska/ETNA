@@ -4,7 +4,7 @@
 2. ETNA requieres graph-tool, numpy, pandas, random, rpy2, ipywidgets, base64, hashlib, typing and seaborn libraries to be installed in your working environment.
 
 3. There are **two** methods of running ETNA: 
-    * .ipynb interpreter (Jupyter Notebook) - You can EITHER download ETNAYourOwnJupyterInterpreter.ipynb, open the file using Jupyter Notebook and run each cell by clicking Shift+Enter OR download ETNA_source_code2.py into your working directory, open a new jupyter notebook, type in a cell %run -i ETNA_source_code2.py and run it by clicking Shift+Enter button.
+    * .ipynb interpreter (Jupyter Notebook) - You can EITHER download ETNAYourOwnJupyterInterpreter.ipynb, open the file using Jupyter Notebook and run each cell by clicking Shift+Enter buttons OR download ETNA_source_code2.py into your working directory, open a new jupyter notebook, type in a cell %run -i ETNA_source_code2.py and run it by clicking Shift+Enter buttons.
     * online .ipynb interpreter (Colab) - Go to https://githubtocolab.com/AlicjaNowakowska/ETNA/blob/main/ETNAColab.ipynb and run each cell by clicking Shift + Enter buttons or download the file ETNAColab.ipynb on your computer, upload it to your Google Drive, open the file using Colab and run each cell by clicking Shift + Enter buttons. 
   
 4. There are 4 network datasets (regarding protein-protein interactions in different contexts) served as exemplary ones. They can be found in the folder ExemplaryData.zip
