@@ -9,7 +9,7 @@
   
 4. There are 4 network datasets (regarding protein-protein interactions in different contexts) served as exemplary ones. They can be found in the folder ExemplaryData.zip
 
-If in Colab an issue with matplotlib appears: "from matplotlib import png ImportError: cannot import name png from matplotlib" wirte in an empty cell the following: 
+If an issue with matplotlib appears: "from matplotlib import png ImportError: cannot import name png from matplotlib" wirte in an empty cell the following: 
 
 !python -m pip uninstall matplotlib
 
