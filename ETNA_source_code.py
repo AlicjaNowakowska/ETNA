@@ -57,7 +57,7 @@ class My_Network:
     """
 
     self.G.set_directed(False) # 1)
-    graph_tool.stats.remove_parallel_edges(self.G) # 2)
+    graph_tool.generation.remove_parallel_edges(self.G) # 2)
 
     # 3)
     comp, hist = graph_tool.topology.label_components(self.G) 
