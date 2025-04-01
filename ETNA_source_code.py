@@ -116,7 +116,7 @@ class My_Network:
     """
 
     # General settings:
-    plt.style.use('seaborn-whitegrid')  
+    plt.style.use("seaborn-v0_8-whitegrid")  
     fig, ax = plt.subplots(constrained_layout=True, figsize=(5, 5))
     FONT = 15
 
@@ -185,7 +185,7 @@ class My_Network:
 
     # Plot settings:
     FONT = 15
-    plt.style.use('seaborn-whitegrid')  
+    plt.style.use("seaborn-v0_8-whitegrid")  
     plt.figure(figsize=(5,5))
     plt.xticks(fontsize=FONT-3)
     plt.yticks(fontsize=FONT-3)
@@ -207,7 +207,7 @@ class My_Network:
 
     # Plot settings:
     FONT=15
-    plt.style.use('seaborn-whitegrid')  
+    plt.style.use("seaborn-v0_8-whitegrid")  
     plt.figure(figsize=(5,5))
     sns.set_context("paper", rc={"font.size":FONT,"axes.titlesize":FONT,"axes.labelsize":FONT, "xtick.labelsize":FONT-3, "ytick.labelsize":FONT-3,
                       "legend.fontsize":FONT-3, "legend.titlesize":FONT-3})  
@@ -231,7 +231,7 @@ class My_Network:
 
     # Plot settings: 
     FONT = 15
-    plt.style.use('seaborn-whitegrid')  
+    plt.style.use("seaborn-v0_8-whitegrid")  
     fig = plt.figure(figsize=(5,5))
     plt.xlabel("Source degree (k)", fontsize = FONT)
     plt.ylabel("$<k_{nn}(k)>$", fontsize = FONT)
@@ -319,7 +319,7 @@ class My_Network:
 
     # Plot settings:
     FONT = 15
-    plt.style.use('seaborn-whitegrid')
+    plt.style.use("seaborn-v0_8-whitegrid")
     plt.figure(figsize=(5,5))
     plt.title("Cascade size histogram C="+ str(fraction_to_fail), fontsize= FONT)
     plt.xlabel("Value", fontsize= FONT)
@@ -401,7 +401,7 @@ class My_Network:
     FONT = 15
     fraction = [i/100 for i in range(0,100,step)]
     plt.figure(figsize = (5,5))
-    plt.style.use('seaborn-whitegrid')
+    plt.style.use("seaborn-v0_8-whitegrid")
     plot_metric_labels = {"Degree": ["--*", "#D81B60"] , "Betweenness centrality": ["--o", "#1E88E5"],
                           "Closeness centrality" : ["--+","#FFC107"], 
                           "Eigenvector centrality": ["--^", "#004D40"],
@@ -515,7 +515,7 @@ class My_Network:
     fity = plotting_data[3]
     # Plot settings:
     plt.figure(figsize =(5,5))
-    plt.style.use('seaborn-whitegrid')  
+    plt.style.use("seaborn-v0_8-whitegrid")  
     plt.xlabel("log k", fontsize = FONT)
     plt.ylabel("log P(X<k)", fontsize = FONT)
     plt.title("Power law fit", fontsize = FONT)
